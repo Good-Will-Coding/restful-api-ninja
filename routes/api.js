@@ -8,7 +8,12 @@ router.get('/ninjas', (req, res) => {
 
 // add a new ninjas to db
 router.post('/ninjas', (req, res) => {
-    res.send({type: 'POST'})
+    console.log(req.body);
+    res.send({
+        type: 'POST',
+        name: req.body.name,
+        rank: req.body.rank
+    });
 });
 
 // update ninja in db
@@ -21,3 +26,5 @@ router.delete('/ninjas/:id', (req, res) => {
     res.send({type: 'DELETE'})
 });
 
+
+module.exports = router;
