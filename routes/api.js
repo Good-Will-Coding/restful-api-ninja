@@ -26,7 +26,13 @@ router.put("/ninjas/:id", (req, res, next) => {
 
 // delete a ninja
 router.delete("/ninjas/:id", (req, res, next) => {
-  res.send({ type: "DELETE" });
+  // req.params.id takes the id after /ninjas/
+//   console.log(req.params.id);
+  // Ninja refers to the ninja model we required; findbyid is a mongoose method
+  Ninja.findOneAndRemove({ _id: req.params.id }).then(ninja => {
+    // Removes ninja using id from db and returns ninja promise
+    res.send(ninja);
+  });
 });
 
 module.exports = router;

@@ -2,6 +2,8 @@ const express = require("express");
 // const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 
+
+//require routes from routes folder
 const routes = require("./routes/api");
 
 // Set up express app
@@ -11,6 +13,7 @@ const app = express();
 mongoose.connect("mongodb://localhost/ninjago");
 mongoose.Promise = global.Promise;
 
+// parse json
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
