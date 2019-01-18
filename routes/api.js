@@ -21,18 +21,25 @@ router.post("/ninjas", (req, res, next) => {
 
 // update ninja in db
 router.put("/ninjas/:id", (req, res, next) => {
-  res.send({ type: "PUT" });
+  // Find ninja by id, update it using req.body
+  Ninja.findByIdAndUpdate({ _id: req.params.id }, req.body, {new: true}).then(ninja => {
+        res.send(ninja);
+ 
+    })
+    .catch(next);
 });
 
 // delete a ninja
 router.delete("/ninjas/:id", (req, res, next) => {
   // req.params.id takes the id after /ninjas/
-//   console.log(req.params.id);
+  //   console.log(req.params.id);
   // Ninja refers to the ninja model we required; findbyid is a mongoose method
-  Ninja.findOneAndRemove({ _id: req.params.id }).then(ninja => {
-    // Removes ninja using id from db and returns ninja promise
-    res.send(ninja);
-  });
+  Ninja.findByIdAndRemove({ _id: req.params.id })
+    .then(ninja => {
+      // Removes ninja using id from db and returns ninja promise
+      res.send(ninja);
+    })
+    .catch(next);
 });
 
 module.exports = router;

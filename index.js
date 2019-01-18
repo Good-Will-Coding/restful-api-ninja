@@ -1,5 +1,5 @@
 const express = require("express");
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 
 
@@ -10,12 +10,14 @@ const routes = require("./routes/api");
 const app = express();
 
 // connect to mongodb - if ninjago doesn't exist, it will create it for us.
-mongoose.connect("mongodb://localhost/ninjago");
+mongoose.connect("mongodb://localhost/ninjago",  { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 // parse json
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
 
 // use imported routes/ initialize routes
 app.use("/api", routes);
