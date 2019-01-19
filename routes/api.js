@@ -22,9 +22,9 @@ router.post("/ninjas", (req, res, next) => {
 // update ninja in db
 router.put("/ninjas/:id", (req, res, next) => {
   // Find ninja by id, update it using req.body
-  Ninja.findByIdAndUpdate({ _id: req.params.id }, req.body, {new: true}).then(ninja => {
-        res.send(ninja);
- 
+  Ninja.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true })
+    .then(ninja => {
+      res.send(ninja);
     })
     .catch(next);
 });
